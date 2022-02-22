@@ -83,12 +83,15 @@ int main() {
 	cv::Mat res_hists(512, 256, CV_8UC3);
 	cv::Mat hist_img = makeHist(img);
 	hist_img.copyTo(res_hists(cv::Rect(0, 0, 256, 256)));
+	cv::putText(res_hists, "Test png image", cv::Point(50, 15),
+		cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
 	cv::Mat hist_img_025 = makeHist(img);
 	hist_img.copyTo(res_hists(cv::Rect(0, 256, 256, 256)));
+	cv::putText(res_hists, "Test jpg image", cv::Point(50, 271),
+		cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
 
-	cv::imshow("check", res_hists);
 
-	cv::waitKey(0);
+	cv::imwrite("cross_0256x0256_hists.png", res_hists);
 
 	return 0;
 }
