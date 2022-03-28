@@ -10,7 +10,7 @@ std::vector<cv::Mat> colorConversation(std::vector<cv::Mat> f, std::string name)
 std::vector<cv::Mat> tresholdForEveryone(std::vector<cv::Mat> f, std::string name);
 std::vector<cv::Mat> morph(std::vector<cv::Mat> f, std::string name);
 std::vector<cv::Mat> connnectedComponents(std::vector<cv::Mat> f, std::string name);
-cv::Mat makeMosaic(std::vector<cv::Mat> src, std::string name, int type);
+void makeMosaic(std::vector<cv::Mat> src, std::string name, int type);
 
 
 
@@ -125,7 +125,7 @@ std::vector<cv::Mat> connnectedComponents(std::vector<cv::Mat> f, std::string na
 	return vec;
 }
 
-cv::Mat makeMosaic(std::vector<cv::Mat> src, std::string name, int type) {
+ void makeMosaic(std::vector<cv::Mat> src, std::string name, int type) {
 	cv::Mat res_img(720, 1280, type);
 	src[0].copyTo(res_img(cv::Rect(0, 0, 640, 360)));
 	src[1].copyTo(res_img(cv::Rect(640, 360, 640, 360)));
@@ -133,7 +133,7 @@ cv::Mat makeMosaic(std::vector<cv::Mat> src, std::string name, int type) {
 
 	cv::imwrite("lab04_mosaic_" + name + ".png", res_img);
 
-	return res_img;
+	//return res_img;
 }
 
 
@@ -146,94 +146,95 @@ int main() {
 		connected_comp;
 
 	cv::Mat mosaic_original, mosaic_gray, mosaic_bin, mosaic_morph, mosaic_comp;
-
 	///////////////////////////////////////////  1  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 		
 	frames = selectFramesFromVideo("../data/rub100(2).mp4", "lab04_rub100_2");
-	mosaic_original = makeMosaic(frames, "rub100_2", CV_8UC3);
+	makeMosaic(frames, "rub100_2", CV_8UC3);
 
 	gray_frames = colorConversation(frames, "lab04_rub100_2");
-	mosaic_gray = makeMosaic(gray_frames, "gray_rub100_2", CV_32S);
+	makeMosaic(gray_frames, "gray_rub100_2", CV_32S);
 	
 	bin_frames = tresholdForEveryone(gray_frames, "lab04_rub100_2");
-	mosaic_bin = makeMosaic(bin_frames, "bin_rub100_2", CV_32S);
+	makeMosaic(bin_frames, "bin_rub100_2", CV_32S);
 
 	morph_frames = morph(bin_frames, "lab04_rub100_2");
-	mosaic_morph = makeMosaic(morph_frames, "morph_rub100_2", CV_32S);
+	makeMosaic(morph_frames, "morph_rub100_2", CV_32S);
 
 	connected_comp = connnectedComponents(morph_frames, "lab04_rub100_2");
-	mosaic_comp = makeMosaic(connected_comp, "comp_rub100_2", CV_8UC3);
-
+	makeMosaic(connected_comp, "comp_rub100_2", CV_8UC3);
+	
+	
 	///////////////////////////////////////////  2  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	frames = selectFramesFromVideo("../data/rub200(3).mp4", "lab04_rub200_3");
-	mosaic_original = makeMosaic(frames, "rub200_3", CV_8UC3);
+	makeMosaic(frames, "rub200_3", CV_8UC3);
 
 	gray_frames = colorConversation(frames, "lab04_rub200_3");
-	mosaic_gray = makeMosaic(gray_frames, "gray_rub200_3", CV_32S);
+	makeMosaic(gray_frames, "gray_rub200_3", CV_32S);
 
 	bin_frames = tresholdForEveryone(gray_frames, "lab04_rub200_3");
-	mosaic_bin = makeMosaic(bin_frames, "bin_rub200_3", CV_32S);
+	makeMosaic(bin_frames, "bin_rub200_3", CV_32S);
 
 	morph_frames = morph(bin_frames, "lab04_rub200_3");
-	mosaic_morph = makeMosaic(morph_frames, "morph_rub200_3", CV_32S);
+	makeMosaic(morph_frames, "morph_rub200_3", CV_32S);
 
-	connnectedComponents(morph_frames, "lab04_rub200_3");
-	mosaic_comp = makeMosaic(connected_comp, "comp_rub200_3", CV_8UC3);
+	connected_comp = connnectedComponents(morph_frames, "lab04_rub200_3");
+	makeMosaic(connected_comp, "comp_rub200_3", CV_8UC3);
 
 
 	///////////////////////////////////////////  3  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	frames = selectFramesFromVideo("../data/rub100(3).mp4", "lab04_rub100_3");
-	mosaic_original = makeMosaic(frames, "rub100_3", CV_8UC3);
+	makeMosaic(frames, "rub100_3", CV_8UC3);
 
 	gray_frames = colorConversation(frames, "lab04_rub100_3");
-	mosaic_gray = makeMosaic(gray_frames, "gray_rub100_3", CV_32S);
+	makeMosaic(gray_frames, "gray_rub100_3", CV_32S);
 
 	bin_frames = tresholdForEveryone(gray_frames, "lab04_rub100_3");
-	mosaic_bin = makeMosaic(bin_frames, "bin_rub100_3", CV_32S);
+	makeMosaic(bin_frames, "bin_rub100_3", CV_32S);
 
 	morph_frames = morph(bin_frames, "lab04_rub100_3");
-	mosaic_morph = makeMosaic(morph_frames, "morph_rub100_3", CV_32S);
+	makeMosaic(morph_frames, "morph_rub100_3", CV_32S);
 
-	connnectedComponents(morph_frames, "lab04_rub100_3");
-	mosaic_comp = makeMosaic(connected_comp, "comp_rub100_3", CV_8UC3);
+	connected_comp = connnectedComponents(morph_frames, "lab04_rub100_3");
+	makeMosaic(connected_comp, "comp_rub100_3", CV_8UC3);
 
 
 	///////////////////////////////////////////  4  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	frames = selectFramesFromVideo("../data/rub500.mp4", "lab04_rub500");
-	mosaic_original = makeMosaic(frames, "rub500", CV_8UC3);
+	makeMosaic(frames, "rub500", CV_8UC3);
 
 	gray_frames = colorConversation(frames, "lab04_rub500");
-	mosaic_gray = makeMosaic(gray_frames, "gray_rub500", CV_32S);
+	makeMosaic(gray_frames, "gray_rub500", CV_32S);
 
 	bin_frames = tresholdForEveryone(gray_frames, "lab04_rub500");
-	mosaic_bin = makeMosaic(bin_frames, "bin_rub500", CV_32S);
+	makeMosaic(bin_frames, "bin_rub500", CV_32S);
 
 	morph_frames = morph(bin_frames, "lab04_rub500");
-	mosaic_morph = makeMosaic(morph_frames, "morph_rub500", CV_32S);
+	makeMosaic(morph_frames, "morph_rub500", CV_32S);
 
-	connnectedComponents(morph_frames, "lab04_rub500");
-	mosaic_comp = makeMosaic(connected_comp, "comp_rub500", CV_8UC3);
+	connected_comp = connnectedComponents(morph_frames, "lab04_rub500");
+	makeMosaic(connected_comp, "comp_rub500", CV_8UC3);
 
 
 	///////////////////////////////////////////  5  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	frames = selectFramesFromVideo("../data/rub500(2).mp4", "lab04_rub500_2");
-	mosaic_original = makeMosaic(frames, "rub500_2", CV_8UC3);
+	makeMosaic(frames, "rub500_2", CV_8UC3);
 
 	gray_frames = colorConversation(frames, "lab04_rub500_2");
-	mosaic_gray = makeMosaic(gray_frames, "gray_rub500_2", CV_32S);
+	makeMosaic(gray_frames, "gray_rub500_2", CV_32S);
 
 	bin_frames = tresholdForEveryone(gray_frames, "lab04_rub500_2");
-	mosaic_bin = makeMosaic(bin_frames, "bin_rub500_2", CV_32S);
+	makeMosaic(bin_frames, "bin_rub500_2", CV_32S);
 
 	morph_frames = morph(bin_frames, "lab04_rub500_2");
-	mosaic_morph = makeMosaic(morph_frames, "morph_rub500_2", CV_32S);
+	makeMosaic(morph_frames, "morph_rub500_2", CV_32S);
 
-	connnectedComponents(morph_frames, "lab04_rub500_2");
-	mosaic_comp = makeMosaic(connected_comp, "comp_rub500_2", CV_8UC3);
+	connected_comp = connnectedComponents(morph_frames, "lab04_rub500_2");
+	makeMosaic(connected_comp, "comp_rub500_2", CV_8UC3);
+	
 
 	cv::waitKey(0);
 	return 0;
