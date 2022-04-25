@@ -1,8 +1,8 @@
 ## Работа 4. Детектирование границ документов на кадрах видео
 автор: Балаев А.А.
-дата: 2022-04-11T00:34:18
+дата: 2022-04-25T13:31:08
 
-<!-- url: https://github.com/BalaevAA/balaev_a_a.git -->
+url: https://github.com/BalaevAA/balaev_a_a.git
 
 ### Задание
 0. текст, иллюстрации и подписи отчета придумываем самостоятельно
@@ -20,6 +20,8 @@
 8. оцениваем качество выделение зоны и анализируем ошибки
 
 ### Результаты
+
+#### Оценка качества: $(square original image) / (square connected component)$
 
 ### Исходные кадры из каждого ролика
 
@@ -42,6 +44,7 @@
 ![](lab04_mosaic_rub500_2.png)
 Рис. 5. Кадры со 500 рублевой купюры на темном фоне
 
+
 ### Цветоредуцированные изображения
 
 ![](lab04_mosaic_gray_rub100_2.png)
@@ -62,6 +65,7 @@
 
 ![](lab04_mosaic_gray_rub500_2.png)
 Рис. 5. Цветоредуцированные изображения 500 рублевой купюры на темном фоне
+
 
 ### Бинаризированные изображения
 
@@ -110,22 +114,37 @@
 ![](lab04_mosaic_comp_rub100_2.png)
 Рис. 1. Выделенные основные компоненты связности 100 рублевой купюры на темном фоне
 
+- accuracy(square_orig / square_conn_comp): 1.01282
+- accuracy(square_orig / square_conn_comp): 1.00914
+- accuracy(square_orig / square_conn_comp): 1.0157
 
 ![](lab04_mosaic_comp_rub50.png)
 Рис. 2. Выделенные основные компоненты связности 50 рублевой купюры на столе
 
+- accuracy(square_orig / square_conn_comp): 1.18053
+- accuracy(square_orig / square_conn_comp): 1.17174
+- accuracy(square_orig / square_conn_comp): 1.16977
 
 ![](lab04_mosaic_comp_rub200_4.png)
 Рис. 3. Выделенные основные компоненты связности 200 рублевой купюры на синем фоне
 
+- accuracy(square_orig / square_conn_comp): 1.05737
+- accuracy(square_orig / square_conn_comp): 1.05838
+- accuracy(square_orig / square_conn_comp): 1.06026
 
 ![](lab04_mosaic_comp_rub100_3.png)
 Рис. 4. Выделенные основные компоненты связности 100 рублевой купюры на столе
 
+- accuracy(square_orig / square_conn_comp): 1.14337
+- accuracy(square_orig / square_conn_comp): 1.11636
+- accuracy(square_orig / square_conn_comp): 1.1257
 
 ![](lab04_mosaic_comp_rub500_2.png)
 Рис. 5. Выделенные основные компоненты связности 500 рублевой купюры на темном фоне
 
+- accuracy(square_orig / square_conn_comp): 1.00928
+- accuracy(square_orig / square_conn_comp): 1.01626
+- accuracy(square_orig / square_conn_comp): 1.01862
 
 ### Текст программы
 

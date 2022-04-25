@@ -2,16 +2,19 @@
 #include <opencv2/imgcodecs.hpp>
 #include <cmath>
 
-double func(int x) {
-	return 20*log(tan(x*512));
+using namespace cv;
 
+
+double func(int x) {
+	return  abs(x - 60) + 5;
 }
+
 
 int main() {
 	std::string img_path = "../data/cross_0256x0256.png";
 	cv::Mat img_rgb = cv::imread(img_path);
 	cv::Mat img_gre = cv::imread(img_path, cv::IMREAD_GRAYSCALE);
-	
+
 	if (img_rgb.empty() || img_gre.empty()) {
 		std::cout << "Could not read the image: " << img_path << std::endl;
 		return 1;
@@ -20,7 +23,7 @@ int main() {
 	cv::imwrite("lab03_rgb.png", img_rgb);
 
 	cv::imshow("lab03_rgb.png", img_rgb);
-	
+
 	cv::imwrite("lab03_gre.png", img_gre);
 
 	cv::imshow("lab03_gre.png", img_gre);
@@ -34,31 +37,53 @@ int main() {
 	cv::Mat img_gre_res;
 	cv::LUT(img_gre, lookUpTable, img_gre_res);
 	cv::imwrite("lab03_gre_res.png", img_gre_res);
-	
+
 	cv::imshow("lab03_gre_res.png", img_gre_res);
-	
+
 	cv::Mat img_rgb_res;
 	cv::LUT(img_rgb, lookUpTable, img_rgb_res);
 	cv::imwrite("lab03_rgb_res.png", img_rgb_res);
-	
+
 	cv::imshow("lab03_rgb_res.png", img_rgb_res);
 
-	int viz_func_size = 512;
-	int viz_func_w = 512, viz_func_h = 512;
-	cv::Mat viz_func(viz_func_w, viz_func_h, CV_8UC1, cv::Scalar(255, 255, 255));
-	for (int i = 0; i < 256; ++i) {
-		cv::line(
+	
+	Mat viz_func(512, 512, CV_8UC1, cv::Scalar(255, 255, 255));
+	for (int i = 1; i < 256; i++)
+	{
+		line(
 			viz_func,
-			cv::Point((i - 1) * 2, viz_func_h - cvRound(p[i - 1]) * 2),
-			cv::Point((i) * 2, viz_func_h - cvRound(p[i]) * 2),
-			cv::Scalar(0, 0, 0),
-			1,
-			0
+			Point((i - 1) * 2, 511 - (((int)p[i - 1]) * 2)),
+			Point(i * 2, 511 - (((int)p[i]) * 2)),
+			0, 1, 0
 		);
 	}
-	cv::imwrite("lab03_viz_func.png", viz_func);
-	cv::imshow("calcHist Demo", viz_func);
+	arrowedLine(
+			viz_func,
+			Point(120, 511),
+			Point(120, 1),
+			Scalar(0,0,0),
+			2,
+			FILLED, 
+			0, 
+			0.02 );
+	putText(viz_func, "y", cv::Point(128, 10),
+		cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
+	arrowedLine(
+		viz_func,
+		Point(0, 501),
+		Point(501, 501),
+		Scalar(0, 0, 0),
+		2,
+		FILLED,
+		0,
+		0.02);
+	putText(viz_func, "x", cv::Point(495, 490),
+		cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8, cv::Scalar(0, 0, 0), 1, cv::LINE_AA);
+	
+	imwrite("lab03_viz_func.png", viz_func);
+	imshow("lab03_viz_func.png", viz_func);
 
-	cv::waitKey(0);
-	return 0;
+	waitKey();
 }
+
+
